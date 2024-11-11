@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card My Profile</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="stylee.css">
+</head>
+<body class="loading">
+    <div class="page-transition active"></div>
+    
+    <!-- Tambahkan ini sebelum div profile-container -->
+    <div id="particles-js"></div>
+
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-square"></div>
+        <div class="floating-triangle"></div>
+        <div class="floating-cross"></div>
+    </div>
+
+    <!-- Gunakan struktur profile yang sudah ada sebelumnya -->
+    <div class="profile-container">
+        <!-- Konten profile tetap sama seperti sebelumnya -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <!-- Bagian Depan -->
+                <div class="flip-card-front">
+                    <div class="profile-image">
+                        <img src="bfd50216031f9ad9b8efe8b5921c84f6.jpg" alt="Profile Picture">
+                    </div>
+                    <div class="profile-info">
+                        <h2 class="name">RilszX-Dev</h2>
+                        <p class="title">Mobile development</p>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Bogor, Indonesia
+                        </div>
+                    </div>
+                    <div class="hover-info">
+                        <p>Hover to see more info</p>
+                        <i class="fas fa-sync"></i>
+                    </div>
+                </div>
+                <!-- Bagian Belakang -->
+                <div class="flip-card-back">
+                    <h3>About Me</h3>
+                    <p class="bio">
+                        Passionate developer with 1 years of experience in Mobile Dev & Web Dev.
+                    </p>
+                    <div class="skills">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Python</span>
+                        <span>Dart+Flutter</span>
+                        <span>PHP</span>
+                        <span>Java</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/azk4rls"><i class="fab fa-github"></i></a>
+                        <a href="https://www.tiktok.com/@norfh04"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/ask4rls.youv"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:rilzy511@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="matrix-bg"></div>
+    <div class="grid-3d">
+        <div class="grid-plane"></div>
+    </div>
+
+    <div class="code-animation"></div>
+
+    <div class="terminal-bg"></div>
+    <div class="scan-line"></div>
+    <div class="glitch"></div>
+    <div class="code-window"></div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const transition = document.querySelector('.page-transition');
+            const params = new URLSearchParams(window.location.search);
+            
+            // Cek jika datang dari transisi
+            if (params.get('transition') === 'true') {
+                // Tunggu sedikit untuk memastikan halaman sudah siap
+                setTimeout(() => {
+                    transition.classList.add('slide-out');
+                    document.body.classList.remove('loading');
+                }, 100);
+            } else {
+                // Jika langsung akses profile.html
+                transition.style.display = 'none';
+                document.body.classList.remove('loading');
+            }
+        });
+
+        particlesJS('particles-js',
+        {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Matrix rain effect
+        function createMatrixRain() {
+            const matrixBg = document.querySelector('.matrix-bg');
+            const columns = Math.floor(window.innerWidth / 20);
+            const drops = [];
+
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+
+            function draw() {
+                let output = '';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = String.fromCharCode(0x30A0 + Math.random() * 96);
+                    output += `<span class="matrix-code" style="position:absolute; left:${i * 20}px; top:${drops[i] * 20}px;">${text}</span>`;
+                    
+                    if (drops[i] * 20 > window.innerHeight && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+                matrixBg.innerHTML = output;
+            }
+
+            setInterval(draw, 50);
+        }
+
+        // 3D Grid animation
+        function create3DGrid() {
+            const grid = document.querySelector('.grid-3d');
+            
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                grid.style.transform = `
+                    rotateX(${60 + y * 10}deg)
+                    rotateY(${x * 10}deg)
+                `;
+            });
+        }
+
+        // Initialize effects
+        createMatrixRain();
+        create3DGrid();
+
+        // Add animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes gridMove {
+                0% {
+                    transform: rotateX(60deg) translateY(0);
+                }
+                100% {
+                    transform: rotateX(60deg) translateY(50px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const pythonCode = [
+            '# AI Development Framework',
+            'import tensorflow as tf',
+            'import numpy as np',
+            'from sklearn import metrics',
+            '',
+            'class NeuralNetwork:',
+            '    def __init__(self):',
+            '        self.model = None',
+            '        self.history = []',
+            '',
+            '    def build_model(self):',
+            '        model = tf.keras.Sequential([',
+            '            tf.keras.layers.Dense(128),',
+            '            tf.keras.layers.Dropout(0.2),',
+            '            tf.keras.layers.Dense(10)',
+            '        ])',
+            '        return model',
+            '',
+            'def train_model(model, data):',
+            '    x_train, y_train = data',
+            '    model.compile(optimizer="adam")',
+            '    model.fit(x_train, y_train)',
+            '',
+            'class DataProcessor:',
+            '    def preprocess(self, data):',
+            '        return np.array(data)',
+            '',
+            '    def normalize(self, data):',
+            '        return data / 255.0',
+            '',
+            'def evaluate_model(model, test_data):',
+            '    predictions = model.predict(test_data)',
+            '    accuracy = metrics.accuracy_score()',
+            '    return accuracy',
+            '',
+            'if __name__ == "__main__":',
+            '    nn = NeuralNetwork()',
+            '    model = nn.build_model()',
+            '    train_model(model, data)'
+        ];
+
+        class CodeAnimation {
+            constructor() {
+                this.container = document.querySelector('.code-animation');
+                this.lines = [];
+                this.currentLine = 0;
+                this.init();
+            }
+
+            init() {
+                // Clear existing content
+                this.container.innerHTML = '';
+                this.lines = [];
+                
+                // Distribute lines across screen
+                pythonCode.forEach((code, index) => {
+                    const line = document.createElement('div');
+                    line.className = 'code-line';
+                    line.textContent = code;
+                    
+                    // Improved positioning for full screen coverage
+                    const column = index % 5; // 5 columns
+                    const row = Math.floor(index / 5);
+                    
+                    // Calculate position to cover entire viewport
+                    const xPos = (column * 20) + Math.random() * 5; // 20% width per column
+                    const yPos = (row * 4) + Math.random() * 2; // 4% height per row
+                    
+                    line.style.left = `${xPos}vw`;
+                    line.style.top = `${yPos}vh`;
+                    
+                    this.container.appendChild(line);
+                    this.lines.push(line);
+                });
+
+                this.animate();
+            }
+
+            animate() {
+                const showLine = () => {
+                    if (this.currentLine < this.lines.length) {
+                        this.lines[this.currentLine].classList.add('active');
+                        this.currentLine++;
+                        setTimeout(showLine, 100);
+                    } else {
+                        setTimeout(() => {
+                            this.lines.forEach(line => {
+                                line.classList.remove('active');
+                                // Update positions for next animation
+                                const column = Math.floor(Math.random() * 5);
+                                const row = Math.floor(Math.random() * 20);
+                                
+                                const xPos = (column * 20) + Math.random() * 5;
+                                const yPos = (row * 4) + Math.random() * 2;
+                                
+                                line.style.left = `${xPos}vw`;
+                                line.style.top = `${yPos}vh`;
+                            });
+                            this.currentLine = 0;
+                            showLine();
+                        }, 3000);
+                    }
+                };
+                showLine();
+            }
+
+            handleClick(line) {
+                // Efek ketika diklik
+                line.style.transform = 'scale(1.2) rotate(360deg)';
+                line.style.color = '#ff0';
+                line.style.textShadow = '0 0 10px #ff0';
+                
+                setTimeout(() => {
+                    line.style.transform = '';
+                    line.style.color = '';
+                    line.style.textShadow = '';
+                }, 1000);
+            }
+        }
+
+        // Initialize animation when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new CodeAnimation();
+        });
+
+        // Update code snippets dengan konten yang lebih terstruktur
+        const codeSnippets = [
+            '# System Initialization',
+            'import sys',
+            'import time',
+            'import random',
+            '',
+            'class System:',
+            '    def __init__(self):',
+            '        self.status = "init"',
+            '',
+            '    def boot(self):',
+            '        print("Booting...")',
+            '        self.load_modules()',
+            '',
+            'def load_modules():',
+            '    modules = [',
+            '        "core",',
+            '        "graphics",',
+            '        "network"',
+            '    ]',
+            '',
+            '    for module in modules:',
+            '        load(module)',
+            '        time.sleep(1)',
+            '',
+            'class Graphics:',
+            '    def render(self):',
+            '        self.update()',
+            '        self.draw()',
+            '',
+            'def main():',
+            '    system = System()',
+            '    system.boot()',
+            '    while True:',
+            '        system.update()',
+            '',
+            'if __name__ == "__main__":',
+            '    main()',
+        ];
+
+        class TerminalAnimation {
+            constructor() {
+                this.container = document.querySelector('.code-window');
+                this.currentLine = 0;
+                this.columns = [
+                    document.createElement('div'),
+                    document.createElement('div'),
+                    document.createElement('div')
+                ];
+                
+                this.columns.forEach(col => {
+                    col.className = 'code-column';
+                    this.container.appendChild(col);
+                });
+                
+                this.init();
+            }
+
+            init() {
+                // Clear previous content
+                this.columns.forEach(col => col.innerHTML = '');
+                this.typeNextLine();
+            }
+
+            typeNextLine() {
+                if (this.currentLine >= codeSnippets.length) {
+                    setTimeout(() => {
+                        this.currentLine = 0;
+                        this.init();
+                    }, 5000); // Longer pause before restart
+                    return;
+                }
+
+                const line = document.createElement('div');
+                line.className = 'code-line';
+                line.textContent = codeSnippets[this.currentLine];
+                
+                const columnIndex = this.currentLine % 3;
+                this.columns[columnIndex].appendChild(line);
+
+                setTimeout(() => {
+                    this.currentLine++;
+                    this.typeNextLine();
+                }, 200); // Slower typing speed
+            }
+        }
+
+        // Start animation
+        const terminalAnim = new TerminalAnimation();
+
+        // Add random glitch effects
+        setInterval(() => {
+            const glitch = document.createElement('div');
+            glitch.className = 'glitch';
+            document.body.appendChild(glitch);
+            setTimeout(() => glitch.remove(), 200);
+        }, 3000);
+    </script>
+</body>
+</html>

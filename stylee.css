@@ -1,0 +1,606 @@
+/* Reset dan Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.flip-card {
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover {
+    filter: drop-shadow(0 0 10px rgba(71, 118, 230, 0.3));
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Front Side Styling */
+.flip-card-front {
+    background: linear-gradient(35deg, #143873f3,rgba(107, 55, 144, 0.914), #128c9fed, #9506c4d1);
+    color: white;
+    padding: 30px;
+}
+
+.profile-image {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 15px #4776E6,
+                    0 0 20px #4776E6;
+    }
+    50% {
+        box-shadow: 0 0 10px #fff,
+                    0 0 20px #fff,
+                    0 0 25px #4776E6,
+                    0 0 30px #4776E6;
+    }
+    100% {
+        box-shadow: 0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 15px #4776E6,
+                    0 0 20px #4776E6;
+    }
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    margin-bottom: 30px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                 0 0 20px rgba(71, 118, 230, 0.3),
+                 0 0 30px rgba(71, 118, 230, 0.2);
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                     0 0 20px rgba(71, 118, 230, 0.3),
+                     0 0 30px rgba(71, 118, 230, 0.2);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                     0 0 30px rgba(71, 118, 230, 0.3),
+                     0 0 40px rgba(71, 118, 230, 0.2);
+    }
+}
+
+.title {
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 15px;
+}
+
+.location {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+}
+
+.location i {
+    margin-right: 5px;
+}
+
+.hover-info {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+}
+
+.hover-info i {
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+/* Back Side Styling */
+.flip-card-back {
+    background: white;
+    color: #333;
+    transform: rotateY(180deg);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flip-card-back h3 {
+    color: #4776E6;
+    margin-bottom: 15px;
+}
+
+.bio {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.skills span {
+    background: #f0f0f0;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #333;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.skills span:hover {
+    background: #4776E6;
+    color: #ffffff;
+}
+
+.skills span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: skillShine 2s linear infinite;
+}
+
+@keyframes skillShine {
+    100% {
+        left: 100%;
+    }
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    color: #4776E6;
+    font-size: 20px;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+.social-links a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #4776E6, transparent 70%);
+    opacity: 0;
+    transition: 0.3s;
+    transform: scale(0.5);
+}
+
+.social-links a:hover::before {
+    opacity: 0.3;
+    transform: scale(1.5);
+}
+
+/* Hover Effects */
+.flip-card-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.flip-card:hover .flip-card-front::before {
+    left: 100%;
+}
+
+/* Particles Background */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
+}
+
+/* Floating Elements */
+.floating-elements {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.floating-circle,
+.floating-square,
+.floating-triangle,
+.floating-cross {
+    position: absolute;
+    opacity: 0.1;
+}
+
+.floating-circle {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #4776E6;
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.floating-square {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #5c1e86;
+    top: 60%;
+    right: 20%;
+    animation: float 10s ease-in-out infinite;
+}
+
+.floating-triangle {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 40px solid #6a6243;
+    opacity: 0.1;
+    top: 30%;
+    right: 30%;
+    animation: float 12s ease-in-out infinite;
+}
+
+.floating-cross {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 20%;
+    left: 30%;
+    animation: float 9s ease-in-out infinite;
+}
+
+.floating-cross::before,
+.floating-cross::after {
+    content: '';
+    position: absolute;
+    background: #4776E6;
+}
+
+.floating-cross::before {
+    width: 100%;
+    height: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.floating-cross::after {
+    width: 3px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+/* Add animation for card appearance */
+.profile-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 300px;
+    margin: auto;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.flip-card-front::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: rotate(45deg) translate(-100%, -100%);
+    }
+    100% {
+        transform: rotate(45deg) translate(100%, 100%);
+    }
+}
+
+/* Hapus background sebelumnya dan tambahkan yang baru */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: #0a0a0a;
+}
+
+/* Matrix rain effect */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    opacity: 0.8;
+}
+
+.matrix-code {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1;
+    text-shadow: 0 0 5px #0f0;
+}
+
+/* 3D Grid effect */
+.grid-3d {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    z-index: 4;
+}
+
+.grid-plane {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px),
+                linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: rotateX(60deg);
+    animation: gridMove 20s linear infinite;
+}
+
+/* Style untuk code animation */
+.code-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    font-family: 'Consolas', monospace;
+    color: #00ff00;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.code-line {
+    position: absolute;
+    font-size: 14px;
+    white-space: pre;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 3px #00ff00;
+}
+
+.code-line.active {
+    opacity: 0.4;
+    transform: translateY(0);
+}
+
+.code-line:nth-child(even) {
+    color: #0ff;
+}
+
+.code-line:nth-child(3n) {
+    color: #ff0;
+}
+
+/* Terminal/Computer background styling - Updated */
+.code-window {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create 3 columns */
+    gap: 20px;
+    padding: 40px;
+    z-index: 9;
+}
+
+.code-column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between lines */
+}
+
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: #00ff00;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+@keyframes typeLine {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Scan line effect */
+.scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 255, 0, 0.1);
+    animation: scan 6s linear infinite;
+    z-index: 7;
+}
+
+@keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+/* Screen glitch effect */
+.glitch {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 255, 0, 0.02);
+    pointer-events: none;
+    animation: glitch 4s infinite;
+    z-index: 8;
+}
+
+@keyframes glitch {
+    0% { transform: translateX(0); }
+    2% { transform: translateX(-2px); }
+    4% { transform: translateX(2px); }
+    6% { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+
+/* Ensure background elements don't affect layout */
+#particles-js,
+.floating-elements,
+.matrix-bg,
+.grid-3d,
+.code-animation,
+.scan-line,
+.glitch {
+    pointer-events: none;
+}

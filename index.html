@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - RilszX Dev</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Tambahkan ini di awal body -->
+    <div class="page-transition"></div>
+
+    <!-- Background Elements -->
+    <div id="particles-js"></div>
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-square"></div>
+        <div class="floating-triangle"></div>
+        <div class="floating-cross"></div>
+    </div>
+    <div class="matrix-bg"></div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="welcome-text">
+            <h1>Welcome to My Profile</h1>
+            <p>Explore my journey in development & creativity</p>
+        </div>
+        
+        <div class="btn-wrapper">
+            <button class="profile-btn" onclick="goToProfile()">
+                <div class="airplane">
+                    <div class="body"></div>
+                    <div class="wing-left"></div>
+                    <div class="wing-right"></div>
+                    <div class="tail"></div>
+                </div>
+                <span class="btn-content">
+                    <span class="btn-text">Go to Profile</span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Updated loading overlay -->
+    <div class="loading-overlay">
+        <div class="loading-content">
+            <div class="rubik">
+                <!-- Front face -->
+                <div class="face front">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+                <!-- Back face -->
+                <div class="face back">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+                <!-- Right face -->
+                <div class="face right">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+                <!-- Left face -->
+                <div class="face left">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+                <!-- Top face -->
+                <div class="face top">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+                <!-- Bottom face -->
+                <div class="face bottom">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+            </div>
+            <div class="loading-text">
+                Loading<span class="loading-dots"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js Config
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Matrix rain effect
+        function createMatrixRain() {
+            const matrixBg = document.querySelector('.matrix-bg');
+            const columns = Math.floor(window.innerWidth / 20);
+            const drops = [];
+
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+
+            function draw() {
+                let output = '';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = String.fromCharCode(0x30A0 + Math.random() * 96);
+                    output += `<span class="matrix-code" style="left:${i * 20}px; top:${drops[i] * 20}px;">${text}</span>`;
+                    
+                    if (drops[i] * 20 > window.innerHeight && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+                matrixBg.innerHTML = output;
+            }
+
+            setInterval(draw, 50);
+        }
+
+        // Profile button animation
+        function goToProfile() {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const transition = document.querySelector('.page-transition');
+            
+            // Show loading overlay
+            loadingOverlay.classList.add('active');
+            
+            // Navigate after animation
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                transition.classList.add('slide-in');
+                
+                setTimeout(() => {
+                    window.location.href = 'profile.html?transition=true';
+                }, 800);
+            }, 3000);
+        }
+
+        // Add this to both pages
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const transition = document.querySelector('.page-transition');
+            const params = new URLSearchParams(window.location.search);
+            
+            // Hide loading by default
+            loadingOverlay.classList.remove('active');
+            
+            if (params.get('transition') === 'true') {
+                setTimeout(() => {
+                    transition.classList.add('slide-out');
+                }, 100);
+            } else {
+                transition.style.display = 'none';
+            }
+        });
+
+        // Initialize effects
+        createMatrixRain();
+    </script>
+</body>
+</html>

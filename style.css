@@ -1,0 +1,537 @@
+/* Reset dan Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0a0a;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Container styling */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    z-index: 10;
+}
+
+/* Welcome text styling */
+.welcome-text {
+    text-align: center;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.5s;
+}
+
+.welcome-text h1 {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+    font-weight: 600;
+    background: linear-gradient(60deg, #437be3, #bf00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+}
+
+.welcome-text p {
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Button wrapper styling */
+.btn-wrapper {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Profile button styling - Updated */
+.profile-btn {
+    background: linear-gradient(15deg, #16438d, #0a9597, #9506c4);
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+}
+
+.profile-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 198, 255, 0.4);
+}
+
+/* Airplane styling - Updated */
+.airplane {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 40px;
+    height: 40px;
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 100;
+}
+
+.body {
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    background: white;
+    border-radius: 10px;
+}
+
+.wing-left, .wing-right {
+    position: absolute;
+    width: 20px;
+    height: 8px;
+    background: white;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.wing-left {
+    left: -15px;
+    transform: skew(-30deg);
+}
+
+.wing-right {
+    right: -15px;
+    transform: skew(30deg);
+}
+
+.tail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    right: -5px;
+    top: -8px;
+    transform: rotate(45deg);
+}
+
+/* Button content */
+.btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Button transition states - Updated */
+.profile-btn.transform-to-plane {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.profile-btn.transform-to-plane .airplane {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.profile-btn.fly-away .airplane {
+    transform: translate(200%, -200%) scale(1) rotate(45deg);
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Remove the button fly-away animation */
+.profile-btn.fly-away {
+    transform: none;
+}
+
+/* Background elements */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0.15;
+}
+
+.matrix-code {
+    position: absolute;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1;
+    text-shadow: 0 0 5px #0f0;
+}
+
+/* Floating elements */
+.floating-elements {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.floating-circle {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 198, 255, 0.3);
+    border-radius: 50%;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.floating-square {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 114, 255, 0.3);
+    position: absolute;
+    top: 60%;
+    right: 20%;
+    animation: float 10s ease-in-out infinite;
+}
+
+.floating-triangle {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 40px solid rgba(0, 198, 255, 0.3);
+    position: absolute;
+    top: 30%;
+    right: 30%;
+    animation: float 12s ease-in-out infinite;
+}
+
+.floating-cross {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 20%;
+    left: 30%;
+    animation: float 9s ease-in-out infinite;
+}
+
+.floating-cross::before,
+.floating-cross::after {
+    content: '';
+    position: absolute;
+    background: rgba(0, 114, 255, 0.3);
+}
+
+.floating-cross::before {
+    width: 100%;
+    height: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.floating-cross::after {
+    width: 3px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button transition animation */
+.profile-btn.transform-to-plane {
+    transform: scale(0.8);
+    background: white;
+    color: transparent;
+}
+
+.profile-btn.fly-away {
+    transform: translate(100vw, -100vh) rotate(45deg);
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .welcome-text h1 {
+        font-size: 2.5em;
+    }
+    
+    .welcome-text p {
+        font-size: 1em;
+    }
+    
+    .profile-btn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-text h1 {
+        font-size: 2em;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Tambahkan styles untuk page transition */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    z-index: 1000;
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.page-transition.slide-in {
+    transform: translateX(100%);
+}
+
+.page-transition.slide-out {
+    transform: translateX(200%);
+}
+
+/* Loading animation styles - 2x2 Rubik */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.loading-content {
+    text-align: center;
+    perspective: 1000px;
+}
+
+.rubik {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    transform-style: preserve-3d;
+    animation: rotate 3s infinite linear;
+    margin: 0 auto 20px;
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2px;
+    background: #000;
+    padding: 2px;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+}
+
+/* Front face */
+.face.front {
+    transform: translateZ(40px);
+}
+.face.front .cube {
+    background: #ff0000;
+}
+
+/* Back face */
+.face.back {
+    transform: translateZ(-40px) rotateY(180deg);
+}
+.face.back .cube {
+    background: #ff0000;
+}
+
+/* Right face */
+.face.right {
+    transform: translateX(40px) rotateY(90deg);
+}
+.face.right .cube {
+    background: #ffbf00;
+}
+
+/* Left face */
+.face.left {
+    transform: translateX(-40px) rotateY(-90deg);
+}
+.face.left .cube {
+    background: #00ff80;
+}
+
+/* Top face */
+.face.top {
+    transform: translateY(-40px) rotateX(90deg);
+}
+.face.top .cube {
+    background: #0040ff;
+}
+
+/* Bottom face */
+.face.bottom {
+    transform: translateY(40px) rotateX(-90deg);
+}
+.face.bottom .cube {
+    background: #ff5cae;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+    33% {
+        transform: rotateX(360deg) rotateY(0) rotateZ(0);
+    }
+    66% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(0);
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+/* atau */
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+/* atau */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
+
+/* Loading text styles - Updated */
+.loading-text {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 30px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    /* Pilih salah satu font style di bawah */
+
+    /* Style 1 - Futuristic */
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    
+    /* Style 2 - Bold Tech */
+    /*
+    font-family: 'Russo One', sans-serif;
+    text-shadow: 2px 2px 0px rgba(255, 51, 102, 0.5);
+    */
+
+    /* Style 3 - Modern Tech */
+    /*
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(51, 255, 153, 0.5);
+    */
+
+    /* Tambahkan animasi pulse */
+    animation: textPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* Tambahkan dots animation */
+.loading-dots::after {
+    content: '';
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60% { content: '...'; }
+    80%, 100% { content: ''; }
+}
+
+/* Smoke effect */
+.smoke {
+    position: absolute;
+    bottom: 2px;
+    left: -2px;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: smoke 0.5s linear infinite;
+}
+
+@keyframes smoke {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-10px, -10px) scale(2);
+        opacity: 0;
+    }
+}
+
